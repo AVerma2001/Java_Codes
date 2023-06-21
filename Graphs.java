@@ -53,12 +53,21 @@ public class Graphs{
 
 
         }
-
-        /// Breadth First Search ///
-        public static void BFS(ArrayList<Edge> [] graph){ // O(V+E)
-            Queue<Integer> q =  new LinkedList<>();
+        ///////////////////////////////////////////////////////
+        //Breadth First Search//
+        public static void BFS(ArrayList<Edge> graph[]){
             boolean vis[] = new boolean[graph.length];
+            for(int i=0;i<graph.length;i++){
+                if(!vis[i]){
+                    BFSUtil(graph,vis);
+                }
+            }
 
+        }
+
+        
+        public static void BFSUtil(ArrayList<Edge> [] graph, boolean vis[]){ // O(V+E)
+            Queue<Integer> q =  new LinkedList<>();
             // source = 0
             q.add(0);
 
@@ -76,9 +85,18 @@ public class Graphs{
             }
 
         }
-
+        //////////////////////////////////////////////////////
+        
+        //////////////////////////////////////////////////////
         /// Depth First Search ///
-        public static void DFS(ArrayList<Edge> graph[], boolean vis[], int curr){
+        public static void DFS(ArrayList<Edge> graph[]){
+            boolean vis[] = new boolean[graph.length];
+            for(int i=0;i<graph.length;i++){
+                DFSUtil(graph,vis,i);
+            }
+        }
+
+        public static void DFSUtil(ArrayList<Edge> graph[], boolean vis[], int curr){
             // visit current - print curr and make vis[curr] = true
             System.out.print(curr+" ");
             vis[curr] = true;
@@ -86,11 +104,12 @@ public class Graphs{
             for(int i=0;i<graph[curr].size();i++){
                 Edge e = graph[curr].get(i);
                 if(!vis[e.dest]){
-                    DFS(graph,vis,e.dest);
+                    DFSUtil(graph,vis,e.dest);
 
                 }
             }
         }
+        /////////////////////////////////////////////////
 
         public static void main(String args[]){
             int V = 7;

@@ -103,6 +103,77 @@ public class BinaryTree_Code{
         Klevel(root.right,level+1,K);
     }
 
+    // Lowest common ancestor
+    public static Node LCA(Node root,int n1, int n2){
+        if(root == null || root.data == n1 || root.data == n2){
+            return root;
+        }
+
+        Node leftLCA = LCA(root.left,n1,n2);
+        Node rightLCA = LCA(root.right,n1,n2);
+
+        if(rightLCA== null){
+            return leftLCA;
+        }
+        if(leftLCA == null){
+            return rightLCA;
+        }
+        // if leftLCA & rightLC != null --> return root
+        return root;
+    }
+
+    // Kth ancestor of a node
+    public static int Kancestor(Node root, int k, int n){
+        if(root == null){
+            return -1;
+        }
+        if(root.data == n){
+            return 0;
+        }
+        int left = Kancestor(root.left,k,n);
+        int right = Kancestor(root.right,k,n);
+
+        if(left == -1 && right ==-1){
+            return -1;
+        }
+
+        int ans = Math.max(left,right);
+        if(ans+1 == k){
+            return root.data;
+        }
+        
+
+        return ans;
+
+
+    } 
+
+    // Transform to sum tree
+    public static int sumtree(Node root){
+        if(root == null){
+            return 0;
+        }
+        int leftsum = sumtree(root.left);
+        int rightsum = sumtree(root.right);
+
+        int data = root.data;
+
+        int newleft = root.left == null ? 0:root.left.data;
+        int newright = root.right == null ? 0:root.right.data;
+
+        root.data = newleft+leftsum+newright+rightsum;
+
+        return data;
+    }
+    public static void preorder(Node root){
+        if(root == null){
+            return;
+        }
+        System.out.print(root.data+ " ");
+        preorder(root.left);
+        preorder(root.right);
+    }
+
     public static void main(String args[]){
         Node root = new Node(1);
         root.left = new Node(2);
@@ -112,11 +183,14 @@ public class BinaryTree_Code{
         root.right.left = new Node(6);
         root.right.right = new Node(7);
 
+        sumtree(root);
+        preorder(root);
+
         // Node subroot = new Node(2);
         // subroot.left = new Node(4);
         // subroot.right = new Node(5);
 
         // System.out.println(isSubtree(root,subroot));
-        Klevel(root,1,3);
+        // Klevel(root,1,3);
     }
 }

@@ -5,7 +5,7 @@ public class Class_Practice{
             return false;
 
         }
-        for(int i=2;i<n/2;i++){
+        for(int i=2;i<=n/2;i++){
             if(n%i == 0){
                 return false;
 
@@ -13,31 +13,47 @@ public class Class_Practice{
         }
         return true;
     }
-
-    public static boolean CircularPrime(int num){
-        int count = 0;
+    public static int sumofdigits(int num){
+        int sum=0;
         int temp = num;
         while(temp>0){
-            count++;
+            int x = temp%10;
+            sum += x;
             temp = temp/10;
-        }
-        int N = num;
-        while(isPrime(N)){
-            int rem = N%10;
-            int div = N/10;
-            N = (int)Math.pow(10,count-1)*rem+div;
 
-            if(N == num){
-                return true;
-            }
         }
-        return false;
-        
+        return sum;
+    }
+
+    public static void primeInRange(int start,int end){
+        // int arr[] = new int[100];
+        for(int i=start;i<end;i++){
+            if(isPrime(i)){
+                System.out.print(i+" ");
+             }
+            }
+        System.out.println();    
+         for(int i=start;i<end;i++){
+            if(isPrime(i)){
+                int y = sumofdigits(i);
+                if(isPrime(y)){
+                    System.out.println(i+"->"+y+" ");
+                }
+                else{
+                    System.out.println(i+"->"+"not prime");
+                }
+
+            }
+            
+         }   
     }
 
     public static void main(String args[]){
-        int num = 119;
-        System.out.println(CircularPrime(num));
+        int start = 11;
+        int end = 99;
+        primeInRange(start, end);
+        // System.out.println(sumofdigits(end));
+        
 
         
 

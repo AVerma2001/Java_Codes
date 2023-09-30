@@ -195,7 +195,7 @@ public class LinkedList{
     }
 
     // To find mid node of a linked list using FAST-SLOW Approach-(Turtle Hare)
-    public Node findmid(Node head){
+    public static Node findmid(Node head){
         Node slow=head;
         Node fast=head;
         while(fast!=null && fast.next!=null){
@@ -332,16 +332,25 @@ public class LinkedList{
 
     public static void main(String args[]){
         LinkedList ll = new LinkedList();
+        Node head = new Node(1);
+        head.next = new Node(2);
+        head.next.next = new Node(3);
+        head.next.next.next = new Node(4);
+        head.next.next.next.next = new Node(5);
+        
+        System.out.println(findmid(head));
 
-        ll.addLast(1);
-        ll.addLast(2);
-        ll.addLast(3);
-        ll.addLast(4);
-        ll.addLast(5);
 
-        ll.printll();
-        ll.ZigZag();
-        ll.printll();
+        // ll.addLast(1);
+        // ll.addLast(2);
+        // ll.addLast(3);
+        // ll.addLast(2);
+        // ll.addLast(4);
+        // System.out.println(ll.findMid());
+
+        // ll.printll();
+        // ll.ZigZag();
+        // ll.printll();
 
 
         // 1-2-3-1
